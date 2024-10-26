@@ -163,6 +163,3 @@ cython_debug/
 
 # mac misc
 .DS_Store
-
-# massive movie id json
-movie_ids_08_24_2024.json
