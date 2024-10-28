@@ -15,6 +15,17 @@ with open("hash-tables/movies-to-tconst.json", "r") as f:
     movies_to_tconst = json.load(f)
 
 
+def print_path(path):
+    if path:
+        for i, id in enumerate(path):
+            if i:
+                print(" -> ", end="")
+            if i % 2 == 0:
+                print(tconst_to_movies.get(id, ""), end="")
+            else:
+                print(nconst_to_people.get(id, ""), end="")
+
+
 def find_path(start_movie: str, destination_movie: str) -> Union[None, list[str]]:
     if start_movie == destination_movie:
         return [start_movie]
@@ -24,7 +35,7 @@ def find_path(start_movie: str, destination_movie: str) -> Union[None, list[str]
 
     while queue:
         current, path = queue.popleft()
-        path = path + current
+        path = path + [current]
 
         if current == destination_movie:
             return path
@@ -36,6 +47,13 @@ def find_path(start_movie: str, destination_movie: str) -> Union[None, list[str]
         for nconst in tconst_to_nconst.get(current, []):
             for next_tconst in nconst_to_tconst.get(nconst, []):
                 if next_tconst not in visited:
-                    queue.append((next_tconst), path + [nconst])
+                    queue.append(((next_tconst), path + [nconst]))
     # No path was found
     return None
+
+
+start = "The Shining (1980)"
+destination = "I Know What You Did Last Summer (1997)"
+
+path = find_path(movies_to_tconst[start], movies_to_tconst[destination])
+print_path(path)
