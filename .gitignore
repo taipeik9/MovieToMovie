@@ -166,3 +166,11 @@ cython_debug/
 
 # imdb-data (maybe I'll use this in the future)
 imdb-data
+
+# data sets that are compressed and unused
+*.zip
+
+old-json-data
+
+# massive csv
+imdb-tmdb-dataset.csv
