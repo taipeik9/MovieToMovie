@@ -170,6 +170,8 @@ imdb-data
 # data sets that are compressed and unused
 *.zip
 
+*.json
+
 old-json-data
 
 # massive csv
