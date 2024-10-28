@@ -164,7 +164,10 @@ cython_debug/
 # mac misc
 .DS_Store
 
-# imdb-data (maybe I'll use this in the future)
+# imdb-data. This is being used now.
+# This data needs to be downloaded here: https://datasets.imdbws.com/
+# These are the required datasets: name.basics.tsv, title.basics.tsv, title.principals.tsv, title.ratings.tsv
+# and they should all be placed in an imdb-data folder in the root of this project
 imdb-data
 
 # data sets that are compressed and unused
