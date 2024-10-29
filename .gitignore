@@ -5,5 +5,5 @@
 *.zip
 
 # large data files
-*.json
+hash-tables
 *.tsv
