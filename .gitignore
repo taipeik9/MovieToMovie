@@ -173,9 +173,6 @@ imdb-data
 # data sets that are compressed and unused
 *.zip
 
+# large data files
 *.json
-
-old-json-data
-
-# massive csv
-imdb-tmdb-dataset.csv
+*.tsv
