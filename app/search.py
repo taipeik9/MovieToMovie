@@ -5,6 +5,7 @@ import time
 from collections import deque
 
 
+# Purely for testing and timing
 def print_path(
     path: list[str],
     tconst_to_movies: dict[str],
@@ -35,10 +36,7 @@ def convert_path(
 
 
 def find_path(
-    start_movie: str,
-    destination_movie: str,
-    tconst_to_nconst: dict[str],
-    nconst_to_tconst: dict[str],
+    start_movie: str, destination_movie: str, graph: dict[set[str]]
 ) -> Union[None, list[str]]:
     if start_movie == destination_movie:
         return [start_movie]
@@ -57,25 +55,21 @@ def find_path(
             continue
 
         visited.add(current)
-        for nconst in tconst_to_nconst.get(current, []):
-            for next_tconst in nconst_to_tconst.get(nconst, []):
-                if next_tconst not in visited:
-                    queue.append(((next_tconst), path + [nconst]))
+        for neighbour in graph.get(current, []):
+            if neighbour not in visited:
+                queue.append(((neighbour), path))
     # No path was found
     return None
 
 
-def run_find_path(movie_data):
+# Purely for testing and timing
+def run_find_path(graph):
     start_time = time.time()
-    find_path(
-        "tt0032904",
-        "tt1648216",
-        movie_data["tconst_to_nconst"],
-        movie_data["nconst_to_tconst"],
-    )
+    find_path("tt0032904", "tt1648216", graph)
     return time.time() - start_time
 
 
+# Purely for testing and timing
 if __name__ == "__main__":
     movie_data = {}
     with open("hash-tables/tconst-to-nconst.json", "r") as f:
@@ -93,9 +87,11 @@ if __name__ == "__main__":
             movie_data["nconst_to_tconst"][nconst]
         )
 
+    graph = {**movie_data["nconst_to_tconst"], **movie_data["tconst_to_nconst"]}
+
     times = []
     for i in range(5):
-        times.append(run_find_path(movie_data))
+        times.append(run_find_path(graph))
     print(times)
 
     print("Avg Time", sum(times) / len(times), "seconds over", len(times), "calls")
