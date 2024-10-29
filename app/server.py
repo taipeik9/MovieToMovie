@@ -34,5 +34,8 @@ async def get_path(start: str, dest: str):
             start_movie=movie_data["movies_to_tconst"][start],
             destination_movie=movie_data["movies_to_tconst"][dest],
             tconst_to_nconst=movie_data["tconst_to_nconst"],
-        )
+            nconst_to_tconst=movie_data["nconst_to_tconst"],
+        ),
+        tconst_to_movies=movie_data["tconst_to_movies"],
+        nconst_to_people=movie_data["nconst_to_people"],
     )
