@@ -1,4 +1,6 @@
 from typing import Union
+import json
+import time
 
 from collections import deque
 
@@ -61,3 +63,39 @@ def find_path(
                     queue.append(((next_tconst), path + [nconst]))
     # No path was found
     return None
+
+
+def run_find_path(movie_data):
+    start_time = time.time()
+    find_path(
+        "tt0032904",
+        "tt1648216",
+        movie_data["tconst_to_nconst"],
+        movie_data["nconst_to_tconst"],
+    )
+    return time.time() - start_time
+
+
+if __name__ == "__main__":
+    movie_data = {}
+    with open("hash-tables/tconst-to-nconst.json", "r") as f:
+        movie_data["tconst_to_nconst"] = json.load(f)
+    with open("hash-tables/nconst-to-tconst.json", "r") as f:
+        movie_data["nconst_to_tconst"] = json.load(f)
+
+    for tconst in movie_data["tconst_to_nconst"]:
+        movie_data["tconst_to_nconst"][tconst] = set(
+            movie_data["tconst_to_nconst"][tconst]
+        )
+
+    for nconst in movie_data["nconst_to_tconst"]:
+        movie_data["nconst_to_tconst"][nconst] = set(
+            movie_data["nconst_to_tconst"][nconst]
+        )
+
+    times = []
+    for i in range(5):
+        times.append(run_find_path(movie_data))
+    print(times)
+
+    print("Avg Time", sum(times) / len(times), "seconds over", len(times), "calls")
