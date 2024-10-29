@@ -41,3 +41,8 @@ async def get_path(start: str, dest: str):
             nconst_to_people=movie_data["nconst_to_people"],
         )
     }
+
+
+@app.get("/movies")
+async def get_movie_titles():
+    return {"detail": sorted(list(movie_data["tconst_to_movies"].values()))}
