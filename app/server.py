@@ -1,6 +1,6 @@
 import json
 
-from search import find_path, convert_path
+from search import time_find_path, convert_path
 
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
@@ -11,16 +11,16 @@ movie_data = {}
 
 @asynccontextmanager
 async def load_data(app: FastAPI):
-    with open("hash-tables/tconst-to-nconst.json", "r") as f:
-        movie_data["tconst_to_nconst"] = json.load(f)
-    with open("hash-tables/nconst-to-tconst.json", "r") as f:
-        movie_data["nconst_to_tconst"] = json.load(f)
-    with open("hash-tables/tconst-to-movies.json", "r") as f:
-        movie_data["tconst_to_movies"] = json.load(f)
-    with open("hash-tables/nconst-to-people.json", "r") as f:
-        movie_data["nconst_to_people"] = json.load(f)
+    with open("hash-tables/graph.json", "r") as f:
+        movie_data["graph"] = json.load(f)
+    with open("hash-tables/ids-to-text.json", "r") as f:
+        movie_data["ids_to_text"] = json.load(f)
     with open("hash-tables/movies-to-tconst.json", "r") as f:
         movie_data["movies_to_tconst"] = json.load(f)
+
+    # converting all lists to sets for more effecient traversal
+    for id in movie_data["graph"]:
+        movie_data["graph"][id] = set(movie_data["graph"][id])
     yield
     movie_data.clear()
 
@@ -39,18 +39,13 @@ app.add_middleware(
 
 @app.get("/")
 async def get_path(start: str, dest: str):
-    return {
-        "detail": convert_path(
-            find_path(
-                start_movie=movie_data["movies_to_tconst"][start],
-                destination_movie=movie_data["movies_to_tconst"][dest],
-                tconst_to_nconst=movie_data["tconst_to_nconst"],
-                nconst_to_tconst=movie_data["nconst_to_tconst"],
-            ),
-            tconst_to_movies=movie_data["tconst_to_movies"],
-            nconst_to_people=movie_data["nconst_to_people"],
-        )
-    }
+    time, path = time_find_path(
+        start_movie=movie_data["movies_to_tconst"][start],
+        destination_movie=movie_data["movies_to_tconst"][dest],
+        graph=movie_data["graph"],
+        ids_to_text=movie_data["ids_to_text"],
+    )
+    return {"traversalTime": time, "detail": path}
 
 
 @app.get("/movies")
