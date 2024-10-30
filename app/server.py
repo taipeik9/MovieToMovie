@@ -1,6 +1,6 @@
 import json
 
-from search import time_find_path, convert_path
+from search import time_find_path
 
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
@@ -50,4 +50,4 @@ async def get_path(start: str, dest: str):
 
 @app.get("/movies")
 async def get_movie_titles():
-    return {"detail": sorted(list(movie_data["tconst_to_movies"].values()))}
+    return {"detail": sorted(list(movie_data["movies_to_tconst"].keys()))}
