@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+div {
+  margin: 3px 0px;
+}
+
+h1 {
+  font-size: 3em;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+
+.container {
+  width: 1000px;
+}
