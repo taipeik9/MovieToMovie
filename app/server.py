@@ -22,7 +22,7 @@ async def load_data(app: FastAPI):
         k.lower(): v for k, v in movie_data["movies_to_tconst"].items()
     }
 
-    # converting all lists to sets for more effecient traversal
+    # converting all lists to sets for more efficient traversal
     for id in movie_data["graph"]:
         movie_data["graph"][id] = set(movie_data["graph"][id])
     yield
