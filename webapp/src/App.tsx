@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { SearchBar } from "./components/SearchBar";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <></>;
+  return (
+    <div className="App">
+      <div className="search-bar-container">
+        <SearchBar />
+        <div>Search Results</div>
+      </div>
+    </div>
+  );
 }
 
 export default App;
