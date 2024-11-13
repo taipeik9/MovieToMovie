@@ -1,27 +1,32 @@
 import { useState } from "react";
 import "./SearchBar.css";
 
-export const SearchBar = ({ setResults }: { setResults: any }) => {
-  const [input, setInput] = useState("");
-
-  const fetchMovies = async (val: string) => {
-    const response = await fetch("http://0.0.0.0:80/movies");
-    const movies = await response.json();
-
-    const filteredMovies = movies.detail;
-    setResults(movies.detail);
-  };
+export const SearchBar = ({
+  setResults,
+  movies,
+}: {
+  setResults: any;
+  movies: string[];
+}) => {
+  // const [input, setInput] = useState("");
 
   const handleChange = async (val: string) => {
-    fetchMovies(val);
-    setInput(val);
+    if (val.length >= 1) {
+      const filteredMovies = movies.filter((movie: string) =>
+        movie.toLowerCase().includes(val.toLowerCase())
+      );
+      setResults(filteredMovies);
+    } else {
+      setResults([]);
+    }
+    // setInput(val);
   };
 
   return (
     <div className="input-wrapper">
       <input
         placeholder="Type to search..."
-        value={input}
+        // value={input}
         onChange={(e) => handleChange(e.target.value)}
       />
     </div>
