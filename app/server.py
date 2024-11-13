@@ -31,7 +31,7 @@ async def load_data(app: FastAPI):
 
 app = FastAPI(lifespan=load_data)
 
-origins = ["http://localhost:3000"]
+origins = ["http://localhost:5173"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
