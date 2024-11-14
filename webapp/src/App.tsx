@@ -1,18 +1,20 @@
 import { SearchBar } from "./components/SearchBar";
 import "./App.css";
 import { useEffect, useState } from "react";
+import { SearchList } from "./components/SearchList";
 
 function App() {
   const [results, setResults] = useState([]);
   const [movies, setMovies] = useState([]);
+  const [selection, setSelection] = useState("");
+  const [clear, setClear] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
       const response = await fetch("http://0.0.0.0:80/movies");
-      const movies = await response.json();
+      const moviesObj = await response.json();
 
-      setMovies(movies.detail);
-      console.log(movies.detail.length);
+      setMovies(moviesObj.detail);
     };
 
     fetchMovies();
@@ -22,9 +24,19 @@ function App() {
     <div className="App">
       <div className="search-bar-container">
         {movies.length > 0 && (
-          <SearchBar setResults={setResults} movies={movies} />
+          <SearchBar
+            setResults={setResults}
+            setClear={setClear}
+            movies={movies}
+            clear={clear}
+          />
         )}
-        <div>Search Results</div>
+        <SearchList
+          movies={results}
+          setSelection={setSelection}
+          setClear={setClear}
+        />
+        <div>{selection}</div>
       </div>
     </div>
   );
