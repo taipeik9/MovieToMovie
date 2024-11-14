@@ -1,8 +1,9 @@
-import { SearchBar } from "./components/SearchBar";
+import { SearchBar } from "./SearchBar";
 import { useEffect, useState } from "react";
-import { SearchList } from "./components/SearchList";
+import { SearchList } from "./SearchList";
+import "./Search.css";
 
-export const SearchBars = () => {
+export const Search = () => {
   const [results, setResults] = useState([]);
   const [movies, setMovies] = useState([]);
   const [selection, setSelection] = useState("");
