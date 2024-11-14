@@ -1,0 +1,19 @@
+.results-list {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 8px #ddd;
+  margin-top: 1rem;
+  border-radius: 10px;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.search-result {
+  padding: 10px 20px;
+}
+
+.search-result:hover {
+  background-color: #efefef;
+}
