@@ -1,10 +1,15 @@
 import "./App.css";
-import { SearchBars } from "./SearchBars";
+import { Search } from "./components/Search";
 
 function App() {
   return (
     <div className="App">
-      <SearchBars />
+      <div className="container">
+        <div className="search-container">
+          <Search />
+          <Search />
+        </div>
+      </div>
     </div>
   );
 }
