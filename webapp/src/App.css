@@ -7,10 +7,16 @@
 }
 
 .container {
+  padding-top: 20px;
   width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: top;
+  flex-direction: column;
 }
 
 .search-container {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }

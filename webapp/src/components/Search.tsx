@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import { SearchList } from "./SearchList";
 import "./Search.css";
 
-export const Search = () => {
+export const Search = ({ setSelection }: { setSelection: any }) => {
   const [results, setResults] = useState([]);
   const [movies, setMovies] = useState([]);
-  const [selection, setSelection] = useState("");
   const [clear, setClear] = useState(false);
 
   useEffect(() => {
@@ -35,7 +34,6 @@ export const Search = () => {
         setSelection={setSelection}
         setClear={setClear}
       />
-      <div>{selection}</div>
     </div>
   );
 };
