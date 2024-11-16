@@ -9,9 +9,9 @@ export const Results = ({
     <div className="results-container">
       {solution.map(
         (item: { order: number; id: string; name: string; url: string }) => (
-          <div className="result-item-container">
-            <img className="result-image" key={item.url} src={item.url} />
-            <div key={item.id}>{item.name}</div>
+          <div key={item.id} className="result-item-container">
+            <img className="result-image" src={item.url} />
+            <div>{item.name}</div>
           </div>
         )
       )}
