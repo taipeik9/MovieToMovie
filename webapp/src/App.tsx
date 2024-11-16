@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { Search } from "./components/Search";
 import { SearchButton } from "./components/SearchButton";
+import { Results } from "./components/Results";
 
 function App() {
   const [searching, setSearching] = useState(false);
@@ -35,11 +36,7 @@ function App() {
         </div>
         {start} ---- {dest}
         <SearchButton onClick={() => setSearching(true)} />
-        <div style={{ width: "100%" }}>
-          {solution.map((item: string) => (
-            <div key={item}>{item}</div>
-          ))}
-        </div>
+        {solution && <Results solution={solution} />}
       </div>
     </div>
   );

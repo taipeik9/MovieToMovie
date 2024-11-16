@@ -1,0 +1,13 @@
+.results-container {
+  width: 100%;
+}
+
+.result-item-container {
+  display: flex; 
+  align-items: center;
+  margin: 10px 0px;
+}
+
+.result-image {
+  max-width: 150px;
+}
