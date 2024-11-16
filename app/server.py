@@ -1,6 +1,6 @@
 import json
 
-from search import time_find_path
+from search import time_find_path, convert_path
 
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
@@ -17,6 +17,8 @@ async def load_data(app: FastAPI):
         movie_data["ids_to_text"] = json.load(f)
     with open("hash-tables/movies-to-tconst.json", "r") as f:
         movie_data["movies_to_tconst"] = json.load(f)
+    with open("hash-tables/images.json", "r") as f:
+        movie_data["images"] = json.load(f)
     movie_data["list"] = sorted(list(movie_data["movies_to_tconst"].keys()))
     movie_data["movies_to_tconst"] = {
         k.lower(): v for k, v in movie_data["movies_to_tconst"].items()
@@ -44,12 +46,17 @@ app.add_middleware(
 @app.get("/")
 async def get_path(start: str, dest: str):
     time, path = time_find_path(
-        start_movie=movie_data["movies_to_tconst"][start.lower()],
-        destination_movie=movie_data["movies_to_tconst"][dest.lower()],
+        start_movie=movie_data["movies_to_tconst"].get(start.lower(), None),
+        destination_movie=movie_data["movies_to_tconst"].get(dest.lower(), None),
         graph=movie_data["graph"],
-        ids_to_text=movie_data["ids_to_text"],
     )
-    return {"traversalTime": time, "detail": path}
+
+    return {
+        "traversalTime": time,
+        "detail": convert_path(
+            path, ids_to_text=movie_data["ids_to_text"], urls=movie_data["images"]
+        ),
+    }
 
 
 @app.get("/movies")

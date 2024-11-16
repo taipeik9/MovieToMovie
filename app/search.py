@@ -3,23 +3,23 @@ import json
 import time
 
 from collections import deque
+from fastapi import HTTPException
 
 
-# Purely for testing and timing
-def print_path(path: list[str], ids_to_text: dict[str]):
-    if path:
-        for i, id in enumerate(path):
-            if i:
-                print(" -> ", end="")
-            print(ids_to_text.get(id, ""), end="")
-
-
-def convert_path(path: list[str], ids_to_text: dict[str]):
+def convert_path(
+    path: list[str], ids_to_text: dict[str], urls: dict[str]
+) -> list[dict[str]]:
     converted_path = None
     if path:
-        converted_path = []
-        for id in path:
-            converted_path.append(ids_to_text.get(id, ""))
+        converted_path = [
+            {
+                "order": i,
+                "id": id,
+                "name": ids_to_text.get(id, ""),
+                "url": urls.get(id, None),
+            }
+            for i, id in enumerate(path)
+        ]
     return converted_path
 
 
@@ -50,16 +50,26 @@ def find_path(
     return None
 
 
-# Purely for testing and timing
 def time_find_path(
     start_movie: str,
     destination_movie: str,
     graph: dict[set[str]],
-    ids_to_text: dict[str],
 ) -> Tuple[list[str], float]:
+    if not start_movie or not destination_movie:
+        raise HTTPException(status_code=404, detail="Movie not found")
+
     start_time = time.time()
-    path = convert_path(find_path(start_movie, destination_movie, graph), ids_to_text)
+    path = find_path(start_movie, destination_movie, graph)
     return time.time() - start_time, path
+
+
+# Purely for testing and timing
+def print_path(path: list[str], ids_to_text: dict[str]):
+    if path:
+        for i, id in enumerate(path):
+            if i:
+                print(" -> ", end="")
+            print(ids_to_text.get(id, ""), end="")
 
 
 # Purely for testing and timing
