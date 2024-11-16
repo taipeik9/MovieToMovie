@@ -10,7 +10,7 @@ export const Search = ({ setSelection }: { setSelection: any }) => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const response = await fetch("http://0.0.0.0:80/movies");
+      const response = await fetch("http://0.0.0.0:80/movies/");
       const moviesObj = await response.json();
 
       setMovies(moviesObj.detail);
