@@ -1,0 +1,10 @@
+.search-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-card-image {
+  width: 50%;
+  margin: 10px 0px;
+}

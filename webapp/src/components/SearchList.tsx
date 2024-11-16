@@ -1,3 +1,4 @@
+import { Movie } from "../assets/types";
 import "./SearchList.css";
 
 export const SearchList = ({
@@ -7,16 +8,16 @@ export const SearchList = ({
 }: {
   setSelection: any;
   setClear: any;
-  movies: { id: string; name: string }[];
+  movies: Movie[];
 }) => {
   return (
     <div className="results-list">
       {movies &&
-        movies.map((movie: { id: string; name: string }) => (
+        movies.map((movie: Movie) => (
           <div
             className="search-result"
             onClick={() => {
-              setSelection(movie.name);
+              setSelection(movie);
               setClear(true);
             }}
             key={movie.id}

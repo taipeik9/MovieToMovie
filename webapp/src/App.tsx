@@ -3,11 +3,13 @@ import "./App.css";
 import { Search } from "./components/Search";
 import { SearchButton } from "./components/SearchButton";
 import { Results } from "./components/Results";
+import { Movie } from "./assets/types";
+import { SearchCard } from "./components/SearchCard";
 
 function App() {
   const [searching, setSearching] = useState(false);
-  const [start, setStart] = useState("");
-  const [dest, setDest] = useState("");
+  const [start, setStart] = useState<Movie | null>(null);
+  const [dest, setDest] = useState<Movie | null>(null);
   const [solution, setSolution] = useState([]);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ function App() {
         const sol = await response.json();
         setSolution(sol.detail);
       };
-      getPath(start, dest);
+      if (start && dest) getPath(start.name, dest.name);
       setSearching(false);
     }
   }, [searching]);
@@ -33,8 +35,9 @@ function App() {
         <div className="search-container">
           <Search setSelection={setStart} />
           <Search setSelection={setDest} />
+          <SearchCard movie={start} />
+          <SearchCard movie={dest} />
         </div>
-        {start} ---- {dest}
         <SearchButton onClick={() => setSearching(true)} />
         {solution && <Results solution={solution} />}
       </div>
