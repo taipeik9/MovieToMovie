@@ -3,7 +3,7 @@ import json
 from search import time_find_path, convert_path
 
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 movie_data = {}
@@ -70,6 +70,8 @@ async def get_movie_titles():
     return {"detail": movie_data["list"]}
 
 
-@app.get("/images/")
+@app.get("/image/{id}")
 async def get_images(id: str):
-    pass
+    if id not in movie_data["images"].keys():
+        raise HTTPException(status_code=404, detail="id not found")
+    return {"detail": movie_data["images"][id]}
