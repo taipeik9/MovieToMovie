@@ -19,7 +19,13 @@ async def load_data(app: FastAPI):
         movie_data["movies_to_tconst"] = json.load(f)
     with open("hash-tables/images.json", "r") as f:
         movie_data["images"] = json.load(f)
-    movie_data["list"] = sorted(list(movie_data["movies_to_tconst"].keys()))
+    movie_data["list"] = sorted(
+        [
+            {"id": movie_data["movies_to_tconst"][key], "name": key}
+            for key in movie_data["movies_to_tconst"]
+        ],
+        key=lambda x: x["name"],
+    )
     movie_data["movies_to_tconst"] = {
         k.lower(): v for k, v in movie_data["movies_to_tconst"].items()
     }
@@ -59,6 +65,11 @@ async def get_path(start: str, dest: str):
     }
 
 
-@app.get("/movies")
+@app.get("/movies/")
 async def get_movie_titles():
     return {"detail": movie_data["list"]}
+
+
+@app.get("/images/")
+async def get_images(id: str):
+    pass
