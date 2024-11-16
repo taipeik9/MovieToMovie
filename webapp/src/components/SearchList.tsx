@@ -7,21 +7,21 @@ export const SearchList = ({
 }: {
   setSelection: any;
   setClear: any;
-  movies: string[];
+  movies: { id: string; name: string }[];
 }) => {
   return (
     <div className="results-list">
       {movies &&
-        movies.map((movie: string) => (
+        movies.map((movie: { id: string; name: string }) => (
           <div
             className="search-result"
             onClick={() => {
-              setSelection(movie);
+              setSelection(movie.name);
               setClear(true);
             }}
-            key={movie}
+            key={movie.id}
           >
-            {movie}
+            {movie.name}
           </div>
         ))}
     </div>

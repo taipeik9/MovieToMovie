@@ -9,7 +9,7 @@ export const SearchBar = ({
 }: {
   setResults: any;
   setClear: any;
-  movies: string[];
+  movies: { id: string; name: string }[];
   clear: boolean;
 }) => {
   const [input, setInput] = useState("");
@@ -23,8 +23,9 @@ export const SearchBar = ({
   const handleChange = async (val: string) => {
     setInput(val);
     if (val.length >= 1) {
-      const filteredMovies = movies.filter((movie: string) =>
-        movie.toLowerCase().includes(val.toLowerCase())
+      const filteredMovies = movies.filter(
+        (movie: { id: string; name: string }) =>
+          movie.name.toLowerCase().includes(val.toLowerCase())
       );
       setResults(filteredMovies);
     } else {
