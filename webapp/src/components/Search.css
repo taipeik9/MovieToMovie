@@ -7,4 +7,6 @@
   align-items: center;
   min-width: 200px;
   height: 100%;
+  /* this tells the div that there will be an absolute positioned child */
+  position: relative;
 }
