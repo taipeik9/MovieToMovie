@@ -70,7 +70,7 @@ async def get_movie_titles():
     return {"detail": movie_data["list"]}
 
 
-@app.get("/image/{id}")
+@app.get("/image/{id}/")
 async def get_images(id: str):
     if id not in movie_data["images"].keys():
         raise HTTPException(status_code=404, detail="id not found")
