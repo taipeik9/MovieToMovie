@@ -10,3 +10,8 @@
   /* this tells the div that there will be an absolute positioned child */
   position: relative;
 }
+
+.label-container {
+  width: 100%;
+  margin: 5px 0px;
+}

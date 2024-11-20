@@ -3,7 +3,13 @@ import { useEffect, useState } from "react";
 import { SearchList } from "./SearchList";
 import "./Search.css";
 
-export const Search = ({ setSelection }: { setSelection: any }) => {
+export const Search = ({
+  label,
+  setSelection,
+}: {
+  label: string;
+  setSelection: any;
+}) => {
   const [results, setResults] = useState([]);
   const [movies, setMovies] = useState([]);
   const [clear, setClear] = useState(false);
@@ -21,6 +27,9 @@ export const Search = ({ setSelection }: { setSelection: any }) => {
 
   return (
     <div className="search-bar-container">
+      <div className="label-container">
+        <h4 className="search-label">{label}</h4>
+      </div>
       {movies.length > 0 && (
         <SearchBar
           setResults={setResults}

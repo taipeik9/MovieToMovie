@@ -33,8 +33,8 @@ function App() {
       <div className="container">
         <h1>Movie to Movie Solver</h1>
         <div className="search-container">
-          <Search setSelection={setStart} />
-          <Search setSelection={setDest} />
+          <Search label="Start Movie" setSelection={setStart} />
+          <Search label="Destination Movie" setSelection={setDest} />
           <SearchCard movie={start} />
           <SearchCard movie={dest} />
         </div>
