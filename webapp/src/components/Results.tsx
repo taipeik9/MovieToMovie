@@ -11,7 +11,7 @@ export const Results = ({
         (item: { order: number; id: string; name: string; url: string }) => (
           <div key={item.id} className="result-item-container">
             <img className="result-image" src={item.url} />
-            <div>{item.name}</div>
+            <div className="result-label">{item.name}</div>
           </div>
         )
       )}

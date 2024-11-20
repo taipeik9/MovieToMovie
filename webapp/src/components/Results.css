@@ -11,3 +11,7 @@
 .result-image {
   max-width: 150px;
 }
+
+.result-label {
+  margin: 10px;
+}
