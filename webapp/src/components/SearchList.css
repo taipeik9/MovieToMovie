@@ -19,3 +19,9 @@
 .search-result:hover {
   background-color: #efefef;
 }
+
+@media (max-width: 480px) {
+  .results-list {
+    position: static;
+  }
+}

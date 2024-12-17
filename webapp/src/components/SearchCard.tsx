@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { Movie } from "../assets/types";
 import "./SearchCard.css";
 
-export const SearchCard = ({ movie }: { movie: Movie | null }) => {
+export const SearchCard = ({
+  movie,
+  label,
+}: {
+  movie: Movie | null;
+  label: string;
+}) => {
   const [url, setUrl] = useState("");
 
   useEffect(() => {
@@ -19,6 +25,7 @@ export const SearchCard = ({ movie }: { movie: Movie | null }) => {
     <>
       {movie && (
         <div className="search-card">
+          <div className="search-card-label">{label}:</div>
           <img className="search-card-image" src={url} />
           {movie.name}
         </div>

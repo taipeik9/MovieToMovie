@@ -8,3 +8,15 @@
   width: 50%;
   margin: 10px 0px;
 }
+
+.search-card-label {
+  font-weight: bold;
+  margin-top: 10px;
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .search-card-label {
+    display: block;
+  }
+}

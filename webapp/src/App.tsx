@@ -35,8 +35,8 @@ function App() {
         <div className="search-container">
           <Search label="Start Movie" setSelection={setStart} />
           <Search label="Destination Movie" setSelection={setDest} />
-          <SearchCard movie={start} />
-          <SearchCard movie={dest} />
+          <SearchCard movie={start} label="Start" />
+          <SearchCard movie={dest} label="Destination" />
         </div>
         <SearchButton onClick={() => setSearching(true)} />
         {solution && <Results solution={solution} />}
