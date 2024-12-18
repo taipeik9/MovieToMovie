@@ -38,7 +38,11 @@ function App() {
           <SearchCard movie={start} label="Start" />
           <SearchCard movie={dest} label="Destination" />
         </div>
-        <SearchButton onClick={() => setSearching(true)} />
+        <SearchButton
+          onClick={() => setSearching(true)}
+          start={start}
+          dest={dest}
+        />
         {solution && <Results solution={solution} />}
       </div>
     </div>
