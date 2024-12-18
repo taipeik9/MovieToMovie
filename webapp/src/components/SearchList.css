@@ -18,6 +18,7 @@
 
 .search-result:hover {
   background-color: #efefef;
+  cursor: pointer;
 }
 
 @media (max-width: 480px) {
