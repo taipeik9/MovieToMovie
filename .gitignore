@@ -5,7 +5,6 @@
 *.zip
 
 # large data files
-hash-tables
 *.tsv
 
 # screen record for gif
